@@ -1,8 +1,8 @@
 puts "Привет! , Введи своё Имя "
-name=gets.chomp.capitalize
+name = gets.chomp.capitalize
 
 puts "Введите #{name} ваш рост  "
-height=Float(gets.chomp)
+height = Float(gets.chomp)
 
 ideal_wt = (height - 110) * 1.15
 if ideal_wt < 0
