@@ -17,7 +17,6 @@ side_b = sides[1]
 hypo_se = sides[2]
 
 puts "#{hypo_se**2} = #{side_a**2} + #{side_b**2}"
-
 if hypo_se**2 < side_a**2 + side_b**2
   puts 'Треугольник равносторонний'
 elsif hypo_se**2 == side_a**2 + side_b**2
