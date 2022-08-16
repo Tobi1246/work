@@ -17,6 +17,5 @@ end
   cost += name_price.keys.first * name_price.values.first
   puts "Стоимость #{name_t} = #{catalog} "
 end
-
 puts "Стоимость всех ваших товаров = #{cost}"
 
