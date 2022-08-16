@@ -12,6 +12,6 @@ cost = 0
   name_quanta = gets.chomp.to_f
   catalog[name_t] = {name_price=>name_quanta}     
 end
-  catalog.each {|name_t, name_price| cost += name_price.keys.first * name_price.values.first}
+catalog.each {|name_t, name_price| cost += name_price.keys.first * name_price.values.first}
 puts catalog
 puts "Стоимость всех ваших товаров = #{cost}$"
