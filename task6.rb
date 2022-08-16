@@ -16,5 +16,6 @@ cost = 0
 end
 
 catalog.each {|name_t, name_price| cost += name_price.keys.first * name_price.values.first}
+
 puts catalog
 puts "Стоимость всех ваших товаров = #{cost}$"
