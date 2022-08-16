@@ -11,8 +11,9 @@ for i in 0..month - 2
   n_date += m_day[i]
 end
 if (year % 4 == 0)
+	n_date += 1
  else ((year % 400 == 0) && (year % 100 == 0))
-  n_date += 1
+ 	n_date = n_date
 end
 n_date = date + n_date
 puts "Порядковый номер даты #{n_date}"
