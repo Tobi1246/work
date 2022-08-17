@@ -12,7 +12,7 @@ loop  do
   name_price = gets.chomp.to_f
   puts "Ко-во тавара"
   name_quanta = gets.chomp.to_f
-  catalog[name_t.to_sym] = {name_price=>name_quanta}    
+  catalog[name_t] = {name_price=>name_quanta}    
 end
 
 catalog.each do |name_t, name_price|  
