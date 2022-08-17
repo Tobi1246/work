@@ -18,7 +18,7 @@ end
 catalog.each do |name_t, name_price|  
   name_price.each do |keys, values|
     cost = keys * values
-    puts "#{name_t}\t#{keys} #{values} = #{cost}$ "
+    puts "#{name_t}\t#{keys}$ #{values} шт = #{cost}$ "
   end
   cost = 0
 end
