@@ -8,13 +8,13 @@ class Route < Station
     @station << last_station
   end
 
-    def station(station)
-      @station.insert(-2,station)
-    end
+  def station(station)
+    @station.insert(-2,station)
+  end
 
-    def delete_station(station)
-      @station.delete(station)
-    end
+  def delete_station(station)
+    @station.delete(station)
+  end
 
   def  all_station
     @station.each do |keys|
