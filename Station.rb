@@ -11,7 +11,7 @@ class Station
     @train << train
   end
 
-    def type(type)
+  def type(type)
     @train.find_all {|train| train.type == type }
         puts train 
       end
