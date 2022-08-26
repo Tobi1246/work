@@ -1,24 +1,24 @@
 class Station 
-  attr_reader :name_station, :list_train_on_station
+  attr_reader :name_station, :train
 
   def initialize(name_station)
     @name_station = name_station
-    @list_train_on_station = []
+    @train= []
   end
 
   def train(train)
     @train = train
-    @list_train_on_station << train
+    @train << train
   end
 
     def type(type)
-    @list_train_on_station.find_all {|train|  list_train_on_station.type == type }
+    @train.find_all {|train| train.type == type }
         puts train 
       end
     end
   end
 
   def send_train(train)
-    @list_train_on_station.delete(train)
+    @train.delete(train)
   end
 end
