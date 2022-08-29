@@ -1,10 +1,10 @@
-class Train 
+class Train < Route
   attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station
 
-  def initialize(number, type, size, speed = 0)
+  def initialize(number, type, wagon, speed = 0)
     @number = number
     @type = type
-    @size = size
+    @wagon = wagon
   end
 
   def up_speed(speed)
@@ -15,16 +15,16 @@ class Train
     @speed = 0
   end
 
-  def delete_size
-    if (@speed == 0)
+  def delete_wagon
+    if @speed == 0
     @size -= 1
     else
       puts "EROR speed != 0"
     end
   end
 
-  def add_size
-    if (@speed == 0)
+  def add_wagon
+    if @speed == 0
     @size += 1
     else
       puts "EROR speed != 0"
@@ -33,15 +33,15 @@ class Train
 
   def get_route(route)
     @route = route
-    @current_station = route.first_station
+    @current_station = route.start_station
   end
 
   def next_station
-    @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.last_station
+    @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.end_station
   end
 
   def prev_station
-    @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.first_station
+    @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.start_station
   end
 
   def go_next
@@ -53,6 +53,7 @@ class Train
   def go_prev
     @current_station.send_train(self)
     @current_station = prev_station if prev_station
+
     @current_station.set_train(self)
   end
 end
