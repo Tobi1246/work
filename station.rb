@@ -3,19 +3,15 @@ class Station
 
   def initialize(name_station)
     @name_station = name_station
-    @train= []
+    @train = []
   end
 
   def train(train)
-    @train = train
     @train << train
   end
 
-  def type(type)
-    @train.find_all {|train| train.type == type }
-        puts train 
-      end
-    end
+    def type(type)
+    @train.select {|train|  train.type == type }
   end
 
   def send_train(train)
