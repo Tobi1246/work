@@ -53,7 +53,6 @@ class Train < Route
   def go_prev
     @current_station.send_train(self)
     @current_station = prev_station if prev_station
-
     @current_station.set_train(self)
   end
 end
