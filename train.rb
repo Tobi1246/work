@@ -1,4 +1,4 @@
-class Train < Route
+class Train
   attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station
 
   def initialize(number, type, wagon, speed = 0)
@@ -33,7 +33,7 @@ class Train < Route
 
   def get_route(route)
     @route = route
-    @current_station = route.start_station
+    @current_station = self.route.station.first
   end
 
   def next_station
