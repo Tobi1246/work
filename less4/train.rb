@@ -1,48 +1,50 @@
 class Train 
-  attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :get_route, :wagon
+  attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagon
 
-  def initialize(number, type, wagon, speed = 0)
+  def initialize(number)
     @number = number
-    @type = type
-    @wagon = wagon
-    @speed = speed
-  end
-
-  def up_speed(speed)
-    @speed = speed
-  end
-
-  def stop 
     @speed = 0
+    @wagon = []
   end
   
+  def passeger
+    @type = 'Passenger'
+  end
+
+  def cargo
+    @type = 'Cargo'
+  end
+
+  
   def delete_wagon
-    if @speed == 0
-       @wagon -= 1
+    if @speed == 0 && !wagon.empty?
+       @wagon.pop 
     else
-      puts "EROR speed != 0"
+      puts "EROR speed != 0 or type dont correct"
     end
   end
 
-  def add_wagon
+  def add_wagon(wagon)
     if @speed == 0
-      @wagon += 1 
+      @wagon << wagon
     else
-      puts "EROR speed != 0"
+      puts "EROR speed != 0 or type dont correct"
     end
   end
 
   def get_route(route)
     @route = route
-    @current_station = self.route.station
+    @current_station = route.start_station
+    @current_station_index = 0
+    @current_station.set_train(self)
   end
 
   def next_station
-    @route.stations[@route.stations.index(@current_station) + 1] if @current_station != @route.end_station
+    @route.station[@route.station.index(@current_station) + 1] if @current_station != @route.end_station
   end
 
   def prev_station
-    @route.stations[@route.stations.index(@current_station) - 1] if @current_station != @route.start_station
+    @route.station[@route.station.index(@current_station) - 1] if @current_station != @route.start_station
   end
 
   def go_next
@@ -54,7 +56,17 @@ class Train
   def go_prev
     @current_station.send_train(self)
     @current_station = prev_station if prev_station
-
     @current_station.set_train(self)
   end
+
+private # мы не управляем поездом
+
+  def up_speed(speed)
+    @speed = speed
+  end
+
+  def stop 
+    @speed = 0
+  end
+
 end
