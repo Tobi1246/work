@@ -1,10 +1,10 @@
 class Train 
-  attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagon
+  attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagons
 
   def initialize(number)
     @number = number
     @speed = 0
-    @wagon = []
+    @wagons = []
   end
   
   def passeger
@@ -13,23 +13,6 @@ class Train
 
   def cargo
     @type = 'Cargo'
-  end
-
-  
-  def delete_wagon
-    if @speed == 0 && !wagon.empty?
-       @wagon.pop 
-    else
-      puts "EROR speed != 0 or type dont correct"
-    end
-  end
-
-  def add_wagon(wagon)
-    if @speed == 0
-      @wagon << wagon
-    else
-      puts "EROR speed != 0 or type dont correct"
-    end
   end
 
   def get_route(route)
@@ -69,4 +52,21 @@ private # мы не управляем поездом
     @speed = 0
   end
 
+protected # методы получают доп функциалан в интервейсе и нужны только для вызова другим методом
+  
+  def delete_wagon
+    if @speed == 0 && !wagons.empty?
+       @wagons.pop 
+    else
+      puts "EROR speed != 0 or type dont correct"
+    end
+  end
+
+  def add_wagon(wagon)
+    if @speed == 0
+      @wagons << wagon
+    else
+      puts "EROR speed != 0 or type dont correct"
+    end
+  end
 end
