@@ -230,18 +230,18 @@ class Interface
   end
 
   def select_train(number_train)
-   return @trains.find { |item| item.number == number_train } 
+   @trains.find { |item| item.number == number_train } 
   end
 
   def select_route(name)
-   return @routes.find { |item| item.name == name }
+   @routes.find { |item| item.name == name }
   end
 
   def exist_station?(name)
-   return @stations.find { |item| item.name == name }
+   @stations.find { |item| item.name == name }
   end
 
   def route_exist?(name)
-   return @routes.find { |item| item.name == name }
+   @routes.find { |item| item.name == name }
   end
 end
