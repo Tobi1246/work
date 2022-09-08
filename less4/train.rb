@@ -15,6 +15,19 @@ class Train
     @type = 'Cargo'
   end
 
+  def delete_wagon
+   if @speed == 0 && !wagons.empty?
+      @wagons.pop 
+    else
+      puts "EROR speed != 0 or type dont correct"
+    end
+  end
+  
+  def add_wagon(wagon)
+    @wagons << wagon  if @speed == 0 && type == wagon.type
+    puts "EROR speed != 0 or type dont correct" if @speed != 0
+  end
+
   def get_route(route)
     @route = route
     @current_station = route.start_station
@@ -51,19 +64,5 @@ private # мы не управляем поездом
   def stop 
     @speed = 0
   end
-
-protected # методы получают доп функциалан в интервейсе и нужны только для вызова другим методом
-  
-  def delete_wagon
-    if @speed == 0 && !wagons.empty?
-       @wagons.pop 
-    else
-      puts "EROR speed != 0 or type dont correct"
-    end
-  end
-  
-  def add_wagon(wagon)
-    @wagons << wagon  if @speed == 0 && type == wagon.type
-    puts "EROR speed != 0 or type dont correct" if @speed != 0
-  end
 end
+
