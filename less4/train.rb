@@ -61,12 +61,9 @@ protected # методы получают доп функциалан в инт�
       puts "EROR speed != 0 or type dont correct"
     end
   end
-
+  
   def add_wagon(wagon)
-    if @speed == 0
-      @wagons << wagon
-    else
-      puts "EROR speed != 0 or type dont correct"
-    end
+    @wagons << wagon  if @speed == 0 && type == wagon.type
+    puts "EROR speed != 0 or type dont correct" if @speed != 0
   end
 end
