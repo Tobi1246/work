@@ -7,5 +7,6 @@ require_relative 'cargo_wagon'
 require_relative 'route'
 require_relative 'station'
 require_relative 'interface'
+require_relative 'module'
 
 Interface.new.run

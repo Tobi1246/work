@@ -9,10 +9,11 @@ class Station
     @@station << name
     @name = name
     @train_list = []
+    register_instance
   end
 
   def self.all
-    @@name_station
+    @@station
   end
 
   def set_train(train)
