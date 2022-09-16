@@ -13,7 +13,7 @@ class Station
   end
 
   def self.all
-    @@station.values 
+    @@station
   end
 
   def set_train(train)
