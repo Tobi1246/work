@@ -3,10 +3,10 @@ class Station
 
   include InstanceCounter 
 
- @@station = []
+ @@station = {}
 
   def initialize(name)
-    @@station << name
+    @@station[name] = self 
     @name = name
     @train_list = []
     register_instance
@@ -28,4 +28,3 @@ class Station
     @train_list.delete(train)
   end
 end
-  
