@@ -3,17 +3,17 @@ class Station
 
   include InstanceCounter 
 
- @@station = {}
+ @@station = []
 
   def initialize(name)
-    @@station[name] = self 
+    @@station << self 
     @name = name
     @train_list = []
     register_instance
   end
 
   def self.all
-    @@station
+    @@station.values 
   end
 
   def set_train(train)
