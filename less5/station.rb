@@ -20,7 +20,7 @@ class Station
     @train_list << train
   end
 
-    def type_trains(type)
+   def type_trains(type)
     @train_list.select {|train|  train.type == type }
   end
 
