@@ -7,7 +7,7 @@ require_relative 'cargo_wagon'
 require_relative 'route'
 require_relative 'station'
 require_relative 'interface'
-require_relative 'instance_counter.rb'
-require_relative 'company_maker.rb'
+require_relative 'instance_counter'
+require_relative 'company_maker'
 
 Interface.new.run
