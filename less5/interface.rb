@@ -80,7 +80,7 @@ class Interface
 
  def create_train
    print 'Введите номер создаваемого поезда: '
-   number = gets.chomp.to_i
+   number = gets.chomp
    print 'Выберите тип поезда: 1-посажирский, 2-грузовой: '
    type = gets.chomp.to_i 
      if type == 1 
@@ -89,6 +89,9 @@ class Interface
       @trains << CargoTrain.new(number)
     end
    puts "Поезд #{select_train(number)} № #{number} создан"
+   rescue RuntimeError => e
+   puts e.message
+   retry
   end
 
  def create_route
@@ -114,7 +117,7 @@ class Interface
 
   def set_route
     print 'Введите номер поезда для назвачения маршрута: '
-    number_train = gets.chomp.to_i
+    number_train = gets.chomp
     puts select_train(number_train)
     if !select_train(number_train)
       puts 'Такого поезда нет'
@@ -135,7 +138,7 @@ class Interface
 
   def add_wagon
     print 'Введите номер поезда, к которому присоединить вагон: '
-    number = gets.chomp.to_i
+    number = gets.chomp
     if !select_train(number)
       puts 'Такого поезда нет'
       return
@@ -152,7 +155,7 @@ class Interface
 
   def delete_wagon
     print 'Введите номер поезда, от которого отцепить вагон: '
-    number = gets.chomp.to_i
+    number = gets.chomp
     if !select_train(number)
       puts 'такого поезда нет'
       return
@@ -168,7 +171,7 @@ class Interface
 
   def move_up
     print 'Какой поезд отправить вперед на одну станцию? '
-    number = gets.chomp.to_i
+    number = gets.chomp
     train = select_train(number)
     if train && train.route
       train.go_next
@@ -180,7 +183,7 @@ class Interface
 
   def move_back
     print 'Какой поезд отправить назад на одну станцию? '
-    number = gets.chomp.to_i
+    number = gets.chomp
     train = select_train(number)
     if train && train.route
       train.go_prev

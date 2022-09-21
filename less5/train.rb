@@ -1,19 +1,22 @@
 class Train 
   attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagons, :train
 
-  include Compani_Maker
+  include CompanyMaker
   include InstanceCounter 
 
   @@trains = {}
+  NAMBER_TRAIN = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i
 
-  def initialize(number)
-    @@trains[number] = self
-    @number = number
+  def initialize(number)  
+    @number = number.upcase
     @speed = 0
     @wagons = []
+    validate!
     register_instance
+    @@trains[number] = self
   end
-  
+
+
   def self.find(number)
     @@trains[number]
   end
@@ -66,6 +69,13 @@ class Train
     @current_station.set_train(self)
   end
 
+  def valid?
+    validate!
+    true
+  rescue
+    false 
+  end
+
 private # мы не управляем поездом
 
   def up_speed(speed)
@@ -74,6 +84,11 @@ private # мы не управляем поездом
 
   def stop 
     @speed = 0
+  end
+
+  def validate!
+    raise "Некоректный номер поезда! Пример номера :H25-A2, AH4V2" if number !~ NAMBER_TRAIN
+    true
   end
 
 end

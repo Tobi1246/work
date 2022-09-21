@@ -1,4 +1,4 @@
-module Company_Maker
+module CompanyMaker
 
   attr_reader :name_company
 
@@ -8,3 +8,4 @@ module Company_Maker
   end
 
 end
+
