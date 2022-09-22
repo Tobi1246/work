@@ -7,9 +7,9 @@ class Station
   def initialize(name)
     @@station << self 
     @name = name.to_s
-    @train_list = []
-    register_instance
+    @train_list = [] 
     validate!
+    register_instance
   end
 
   def self.all
