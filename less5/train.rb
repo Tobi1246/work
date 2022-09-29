@@ -16,12 +16,17 @@ class Train
     @@trains[number] = self
   end
 
+  def iterate_wagons
+    raise ArgumentError, "No block given" unless block_given?
+
+    @wagons.each.with_index(1) { |wagon, number| yield wagon, number }
+  end
 
   def self.find(number)
     @@trains[number]
   end
 
-  def passeger
+  def passenger
     @type = 'Passenger'
   end
 

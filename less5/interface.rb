@@ -75,7 +75,10 @@ class Interface
       else
        puts 'Такая станция уже существует, введите другое название'
       end
-    end       
+    end
+   rescue RuntimeError => e
+   puts e.message
+   retry       
  end
 
  def create_train
@@ -88,7 +91,7 @@ class Interface
      elsif type == 2
       @trains << CargoTrain.new(number)
     end
-   puts "Поезд #{select_train(number)} № #{number} создан"
+   puts "Поезд #{select_train(number)} № #{number.upcase} создан"
    rescue RuntimeError => e
    puts e.message
    retry
@@ -113,6 +116,9 @@ class Interface
    @routes.each do |item| 
      puts item.station
     end
+   rescue RuntimeError => e
+   puts e.message
+   retry
  end
 
   def set_route
@@ -134,6 +140,9 @@ class Interface
     puts "Маршрут #{name_route} для поезда #{number_train} назначен"
     puts route.name
     puts route
+   rescue RuntimeError => e
+   puts e.message
+   retry
   end
 
   def add_wagon
@@ -145,10 +154,14 @@ class Interface
     end
     train = select_train(number)
     if train.type == :cargo
-      train.add_wagon(CargoWagon.new)
+      print "Введите объём вагона: "
+      v = gets.chomp.to_i
+      train.add_wagon(CargoWagon.new(v))
     end
     if train.type == :passenger
-      train.add_wagon(PassengerWagon.new)
+      print "Введите ко-во мест в вагоне: "
+      s = gets.chomp.to_i
+      train.add_wagon(PassengerWagon.new(s))
     end
     puts 'Вагон успешно добавлен '
   end
@@ -209,7 +222,11 @@ class Interface
     print 'Введите название станции: '
     name = gets.chomp
     exist_station?(name).train_list.each_with_index do |item, index|
-      puts "#{index + 1}: поезд № #{item.number} тип #{item.type}, вагонов - #{item.wagons.size}"
+      print "#{index + 1}: поезд № #{item.number} тип #{item.type}, вагонов - #{item.wagons.size} "
+      item.wagons.each_with_index do |key, index|
+      puts "#{index + 1}: Свободных мест #{key.free_s} , занятых #{key.down} мест " if item.type == :passenger
+      puts "#{index + 1}: Сбододного объёма #{key.free}, занятого объёма #{key.steal_v}" if item.type == :cargo
+      end
     end
   end
 

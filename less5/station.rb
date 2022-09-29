@@ -7,9 +7,17 @@ class Station
   def initialize(name)
     @@station << self 
     @name = name.to_s
-    @train_list = [] 
-    validate!
+    @train_list = []
     register_instance
+    validate!
+  end
+
+  def iterate_trains
+    raise ArgumentError, "No block given" unless block_given?
+
+    @train_list.each do |train|
+      yield train
+    end
   end
 
   def self.all
