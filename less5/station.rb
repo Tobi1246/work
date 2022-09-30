@@ -15,9 +15,7 @@ class Station
   def iterate_trains
     raise ArgumentError, "No block given" unless block_given?
 
-    @train_list.each do |train|
-      yield train
-    end
+    @train_list.each_with_index { |train, index|  yield train, index+1}
   end
 
   def self.all

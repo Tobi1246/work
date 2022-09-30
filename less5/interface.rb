@@ -22,6 +22,8 @@ class Interface
           '10. Просмотреть список поездов на станции',
           '11. добавить станцию в маршрут',
           '12. Удалить станцию из маршрута',
+          '13. Информация о поезде',
+          '14. Манипуляции с поездом',
           '0 - выход из меню'
       ]
       main_menu.each { |item| puts item }
@@ -54,6 +56,10 @@ class Interface
         add_station
       when 12 then
         del_station
+      when 13 then 
+        look_train_wagons_list
+      when 14 then
+        manipulation_train_wagons
       else
         puts 'exit'
         break
@@ -221,12 +227,51 @@ class Interface
   def look_trains_on_station
     print 'Введите название станции: '
     name = gets.chomp
-    exist_station?(name).train_list.each_with_index do |item, index|
-      print "#{index + 1}: поезд № #{item.number} тип #{item.type}, вагонов - #{item.wagons.size} "
-      item.wagons.each_with_index do |key, index|
-      puts "#{index + 1}: Свободных мест #{key.free_s} , занятых #{key.down} мест " if item.type == :passenger
-      puts "#{index + 1}: Сбододного объёма #{key.free}, занятого объёма #{key.steal_v}" if item.type == :cargo
+    exist_station?(name).iterate_trains do |train, index|
+      puts "#{index }: поезд № #{train.number} тип #{train.type}, вагонов - #{train.wagons.size} "
+      train.iterate_wagons do |wagon, number|
+      puts "Вагон #{number}: Свободных мест #{wagon.free_s} , занятых #{wagon.down} мест " if train.type == :passenger
+      puts "Вагон #{number}: Сбододного объёма #{wagon.free}, занятого объёма #{wagon.steal_v}" if train.type == :cargo
       end
+    end
+  end
+
+  def look_train_wagons_list
+    print 'Введите номер поезда: '
+    number = gets.chomp
+    if !select_train(number)
+      puts 'Такого поезда нет'
+      return
+    end
+    train = select_train(number)
+      puts " поезд №#{train.number} тип #{train.type}, вагонов - #{train.wagons.size} "
+    train.iterate_wagons do |wagon, number|
+      puts "Вагон #{number}: Свободных мест #{wagon.free_s} , занятых #{wagon.down} мест " if train.type == :passenger
+      puts "Вагон #{number}: Сбододного объёма #{wagon.free}, занятого объёма #{wagon.steal_v}" if train.type == :cargo
+    end
+  end
+
+  def manipulation_train_wagons
+    print 'Введите номер поезда: '
+    number = gets.chomp
+    if !select_train(number)
+      puts 'Такого поезда нет'
+      return
+    end
+    train = select_train(number)
+    puts " поезд №#{train.number} тип #{train.type}, вагонов - #{train.wagons.size} "
+    if train.type == :passenger 
+      puts "Выберите вагон в которых хотите сесть"   
+      wagon_num = gets.chomp.to_i 
+      num = wagon_num - 1
+      train.wagons[num].seat_down 
+    else train.type == :cargo
+      puts "Выберите вагон в которых хотите поместить свой багаж" 
+      wagon_num = gets.chomp.to_i
+      puts "Введите вес вашего багажа " 
+      volume = gets.chomp.to_i
+      num = wagon_num - 1
+      train.wagons[num].steal(volume) 
     end
   end
 

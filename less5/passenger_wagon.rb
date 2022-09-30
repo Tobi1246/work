@@ -4,7 +4,7 @@ class PassengerWagon < Wagon
   def initialize (seats)
     @seats = seats
     @free_s = seats
-    @down = 0.to_i
+    @down = 0
     @type = :passenger
   end
 
@@ -12,17 +12,12 @@ class PassengerWagon < Wagon
     if @seats != @down 
     @down += 1 
     @free_s -= 1 
+    puts "Вы успешно сели в вагон"
+    puts "Всего мест в вагоне :#{@seats} ,свободных :#{@free_s} занятых :#{@down}"
     else
       puts "Все места заняты"
     end
   end
 
-  def down_seats
-    puts "#{@down} мест занято "
-  end
-
-  def free_seats
-    puts "Свободно #{@free_s} мест "
-  end  
 
 end
