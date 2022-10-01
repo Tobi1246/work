@@ -227,7 +227,7 @@ class Interface
   def look_trains_on_station
     print 'Введите название станции: '
     name = gets.chomp
-    exist_station?(name).train_list do |train, index|
+    exist_station?(name).train_list.each_with_index do |train, index|
       puts "#{index +1}: поезд № #{train.number} тип #{train.type}, вагонов - #{train.wagons.size} "
       train.iterate_wagons do |wagon, number|
         puts "Вагон #{number}: Свободных мест #{wagon.free_s} , занятых #{wagon.down} мест " if train.type == :passenger
