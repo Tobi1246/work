@@ -73,7 +73,7 @@ class Interface
     loop do
       print 'Введите название станции: '
       name = gets.chomp
-      if !exist_station?(name)
+      if !find_station(name)
        @stations << Station.new(name)
        puts "Станция #{name} создана"
        puts @stations.each { |item| puts item.name }
@@ -108,15 +108,15 @@ class Interface
    name = gets.chomp.to_s
    print 'Введите начальную станцию: '
    start_station = gets.chomp
-   if !exist_station?(start_station)
+   if !find_station(start_station)
      puts 'Такой станции еще нет в списке'
    end   
    print 'Введите конечную станцию: '
    end_station = gets.chomp
-   if !exist_station?(end_station)
+   if !find_station(end_station)
     puts 'Такой станции еще нет в списке'
    end   
-   @routes << Route.new(name, exist_station?(start_station), exist_station?(end_station))
+   @routes << Route.new(name, find_station(start_station), find_station(end_station))
    puts "Маршрут #{name} создан"
    print 'Cтанции маршрута: '
    @routes.each do |item| 
@@ -227,11 +227,7 @@ class Interface
   def look_trains_on_station
     print 'Введите название станции: '
     name = gets.chomp
-    if !exist_station?(name)
-      puts 'Такой станции нет! '
-      return
-    end
-    exist_station?(name).train_list.each_with_index do |train, index|
+    find_station(name).train_list.each_with_index do |train, index|
       puts "#{index +1}: поезд № #{train.number} тип #{train.type}, вагонов - #{train.wagons.size} "
       train.iterate_wagons do |wagon, number|
         puts "Вагон #{number}: Свободных мест #{wagon.free_s} , занятых #{wagon.down} мест " if train.type == :passenger
@@ -283,7 +279,7 @@ class Interface
     print "Введите имя маршрута, в который добавить станцию: "
     name = gets.chomp
     print 'Введите имя добавляемой станции: '
-    station = exist_station?(gets.chomp)
+    station = find_station(gets.chomp)
     if route_exist?(name)
       route_exist?(name).add_station(station)
     end
@@ -293,7 +289,7 @@ class Interface
     print "Введите имя маршрута,из которого удалить станцию: "
     name = gets.chomp
     print 'Введите имя удаляемой станции: '
-    station = exist_station?(gets.chomp)
+    station = find_station(gets.chomp)
     if route_exist?(name)
       route_exist?(name).delete_station(station)
     end
@@ -307,7 +303,7 @@ class Interface
    @routes.find { |item| item.name == name }
   end
 
-  def exist_station?(name)
+  def find_station(name)
    @stations.find { |item| item.name == name }
   end
 
