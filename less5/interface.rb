@@ -78,7 +78,7 @@ class Interface
       if !find_station(name)
         @stations << Station.new(name)
         puts "Станция #{name} создана"
-        (puts @stations.each { |item| puts item.name })
+        @stations.each { |item| puts item.name }
         break
       else
         puts 'Такая станция уже существует, введите другое название'
