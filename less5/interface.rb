@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Interface
   attr_reader :stations, :trains, :routes
 
