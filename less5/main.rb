@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'instance_counter'
 require_relative 'company_maker'
 require_relative 'train'
