@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Train
   attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagons, :train
 
