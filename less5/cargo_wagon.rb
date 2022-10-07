@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CargoWagon < Wagon
   attr_reader :size_v, :steal_v, :free
 
