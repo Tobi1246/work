@@ -1,0 +1,60 @@
+
+AllCops:
+
+  Include:
+    - 'cargo_train.rb'
+    - 'cargo_wagon.rb'
+    - 'company_maker.rb'
+    - 'instance_counter.rb'
+    - 'interface.rb'
+    - 'passenger_train.rb'
+    - 'passenger_wagon.rb'
+    - 'route.rb'
+    - 'station.rb'
+    - 'train.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 20
+  Exclude:
+    - 'interface.rb'
+
+Metrics/MethodLength:
+  Max: 10
+  Exclude:
+    - 'interface.rb'  
+
+Metrics/BlockLength:
+  Max: 10
+  Exclude:
+  - 'interface.rb'
+
+Metrics/ClassLength:
+  Max: 110
+  Exclude:
+    - 'interface.rb'
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+  Exclude:
+    - 'interface.rb'
+
+Style/Documentation:
+  Exclude: 
+    - 'cargo_train.rb'
+    - 'cargo_wagon.rb'
+    - 'company_maker.rb'
+    - 'instance_counter.rb'
+    - 'interface.rb'
+    - 'passenger_train.rb'
+    - 'passenger_wagon.rb'
+    - 'route.rb'
+    - 'station.rb'
+    - 'train.rb'
+
+
+
+
+

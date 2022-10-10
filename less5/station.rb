@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class Station
   attr_reader :name, :train_list
 
   include InstanceCounter
   NAME_STATION = /[a-zа-я]+-?[a-zа-я]*/i.freeze
-  @@station = []
 
   def initialize(name)
     @@station << self

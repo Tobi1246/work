@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class CargoWagon < Wagon
   attr_reader :size_v, :steal_v, :free
 
   def initialize(size_v)
+    super
     @size_v = size_v.to_i
     @type = :cargo
     @steal_v = 0

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class Train
-  attr_reader :number, :type, :speed, :current_station, :next_station, :prev_station, :route, :wagons, :train
+  attr_reader :number, :type, :speed, :current_station, :route, :wagons, :train
 
   include CompanyMaker
   include InstanceCounter
 
-  @@trains = {}
   NAMBER_TRAIN = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i.freeze
 
   def initialize(number)

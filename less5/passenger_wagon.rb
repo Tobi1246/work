@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class PassengerWagon < Wagon
   attr_reader :seats, :down, :free_s
 
   def initialize(seats)
+    super
     @seats = seats
     @free_s = seats
     @down = 0
