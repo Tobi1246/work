@@ -1,11 +1,18 @@
 # frozen_string_literal: true
-
 class Station
   attr_reader :name, :train_list
+  @@station = []
 
-  include InstanceCounter
   NAME_STATION = /[a-zа-я]+-?[a-zа-я]*/i.freeze
 
+  extend Asseccors
+  include InstanceCounter
+  include Validation
+
+  validate :name, :presence
+  validate :name, :format, NAME_STATION
+  validate :name, :type, String
+  
   def initialize(name)
     @@station << self
     @name = name.to_s
@@ -35,20 +42,5 @@ class Station
   def send_train(train)
     @train_list.delete(train)
   end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
-  protected
-
-  def validate!
-    raise 'Название станции не может быть таким коротким' if name.length < 3
-    raise 'Некоректное название станции'  if name !~ NAME_STATION
-
-    true
-  end
 end
+

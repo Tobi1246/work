@@ -3,10 +3,16 @@
 class Train
   attr_reader :number, :type, :speed, :current_station, :route, :wagons, :train
 
+  NAMBER_TRAIN = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i.freeze
+
+  extend Asseccors
   include CompanyMaker
   include InstanceCounter
+  include Validation
 
-  NAMBER_TRAIN = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i.freeze
+  validate :name, :presence
+  validate :name, :format, NAMBER_TRAIN
+  validate :name, :type, String
 
   def initialize(number)
     @number = number.upcase
@@ -75,13 +81,6 @@ class Train
     @current_station.add_train(self)
   end
 
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
-  end
-
   private # мы не управляем поездом
 
   def up_speed(speed)
@@ -90,11 +89,5 @@ class Train
 
   def stop
     @speed = 0
-  end
-
-  def validate!
-    raise 'Некоректный номер поезда! Пример номера :H25-A2, AH4V2' if number !~ NAMBER_TRAIN
-
-    true
   end
 end
