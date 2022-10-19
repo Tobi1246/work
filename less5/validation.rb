@@ -21,9 +21,9 @@ module Validation
       when :presence
         raise "#{validation[:name].capitalize} shouldn't be nil or empty!" if attr_val.nil? || attr_val.to_s.empty?
       when :format
-        raise "Wrong format!" if attr_val !~ validation[:parametrs].first
+        raise "Wrong format! #{validation[:name]}" if attr_val !~ validation[:parametrs].first
       when :type
-        raise "Wrong type!" if attr_val.class != validation[:parametrs].first
+        raise "Wrong type!#{validation[:name]}" if attr_val.class != validation[:parametrs].first
       end
     end
   end
